@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseball Opening Day</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .bg-image {
+            /* Full height */
+            height: 100%; 
+            /* Center and scale the image nicely */
+            background: url('22.jpeg') no-repeat center center fixed; 
+            /* Keep the aspect ratio and cover the whole page */
+            background-size: cover;
+            /* Add a black overlay to ensure text readability */
+            position: relative;
+            color: white;
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        h1 {
+            color: white; /* Default text color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding shadow for contrast */
+            opacity: 0.8; /* Adjust opacity for better contrast if needed */
+            font-size: 5vh;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-image" id="bg-image">
+    <div class="content">
+        <h1>Days to Opening Day</h1>
+    </div>
+</div>
+
+
+<script>
+    function daysUntil(targetDate) {
+        // Get the current date
+        var currentDate = new Date();
+
+        // Calculate the difference in milliseconds between the target date and the current date
+        var differenceInMillis = targetDate.getTime() - currentDate.getTime();
+
+        // Convert milliseconds to days
+        var daysLeft = Math.ceil(differenceInMillis / (1000 * 3600 * 24));
+
+        return daysLeft + 1;
+    }
+
+
+    function updateBackgroundImage() {
+        const openingDay = new Date('2024-03-28');
+        const days = daysUntil(openingDay);
+        if (days < 0) {
+            console.log("The target date has passed.");
+            // Optionally handle the case when the target date is in the past
+            return;
+        }
+
+        const bgDiv = document.getElementById('bg-image');
+        const imageName = days + '.jpeg'; // Construct the image filename based on days remaining
+        const imagePath = '' + imageName; // Update this path to where your images are stored
+
+        // Set the background image
+        bgDiv.style.backgroundImage = `url("${imagePath}")`;
+    }
+
+    // Call the function when the page loads
+    window.onload = updateBackgroundImage;
+</script>
+
+</body>
+</html>
