@@ -47,20 +47,24 @@
 <script>
     function daysUntil(targetDate) {
         // Get the current date
-        var currentDate = new Date();
+        const currentDate = new Date()
+        currentDate.setHours(0, 0, 0, 0);
 
         // Calculate the difference in milliseconds between the target date and the current date
-        var differenceInMillis = targetDate.getTime() - currentDate.getTime();
+        const differenceInMillis = targetDate.getTime() - currentDate.getTime();
 
         // Convert milliseconds to days
-        var daysLeft = Math.ceil(differenceInMillis / (1000 * 3600 * 24));
+        const daysLeft = differenceInMillis / (1000 * 3600 * 24);
 
-        return daysLeft + 1;
+        return daysLeft;
     }
 
 
     function updateBackgroundImage() {
-        const openingDay = new Date('2024-03-28');
+        // Need to set time to 0 as well, otherwise it's stored in UTC.
+        // const openingDay = new Date('2024-03-28');
+        // Wed Mar 27 2024 20:00:00 GMT-0400 (Eastern Daylight Time)
+        const openingDay = new Date('2024-03-28T00:00:00');
         const days = daysUntil(openingDay);
         if (days < 0) {
             console.log("The target date has passed.");
