@@ -65,13 +65,8 @@
         // const openingDay = new Date('2024-03-28');
         // Wed Mar 27 2024 20:00:00 GMT-0400 (Eastern Daylight Time)
         const openingDay = new Date('2024-03-28T00:00:00');
-        const days = daysUntil(openingDay);
-        if (days < 0) {
-            console.log("The target date has passed.");
-            // Optionally handle the case when the target date is in the past
-            return;
-        }
-
+        let days = daysUntil(openingDay);
+        if (days < 0) days = 0;
         const bgDiv = document.getElementById('bg-image');
         const imageName = days + '.jpeg'; // Construct the image filename based on days remaining
         const imagePath = '' + imageName; // Update this path to where your images are stored
